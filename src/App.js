@@ -5,7 +5,8 @@ import './App.css';
 function App() {
   const [num,setNum]=useState(0)
   const add=()=>{
-    setNum(num+1)
+    setNum((num)=>num+1)
+    setNum(2)
   }
   const callback =useCallback(()=>{
     console.log(num,'222')
@@ -16,7 +17,7 @@ function App() {
     console.log(memo,memo2,num,'memo,memo2') //实参 为undefined undefined
     return num
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])//依赖项 如果不写则除了初始化之后不会运行
+  },[num])//依赖项 返回一个值
   useEffect((effect1,effect2)=>{
     console.log(effect1,effect2,num,'num')
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,8 +26,12 @@ function App() {
   return (
     <div className="App">
       <div>{num}</div>
+      <div>
       mome{memo}
-      callback{callback()}
+      </div>
+      <div>
+      callback {callback()}
+      </div> 
       <button onClick={add}>click</button>
     </div>
   );
